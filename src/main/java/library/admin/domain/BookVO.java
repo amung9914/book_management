@@ -15,7 +15,8 @@ public class BookVO {
     private String status;
 
     @Builder
-    public BookVO(String bookName, String author, String status) {
+    public BookVO(int bookId, String bookName, String author, String status) {
+        this.bookId = bookId;
         this.bookName = bookName;
         this.author = author;
         this.status = status;
@@ -31,7 +32,7 @@ public class BookVO {
     /**
      * 책 상태 변경 매서드(반납)
      */
-    public void returnBook(){
+    public void makeAvailable(){
         this.status = "AVAILABLE";
     }
 

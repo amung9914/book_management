@@ -28,8 +28,4 @@ public class RecordVO {
         this.returnTime = returnTime;
     }
 
-    // 책 반납 시간 기록 메서드
-    public void recordReturnTime(){
-        this.returnTime = LocalDateTime.now();
-    }
 }
