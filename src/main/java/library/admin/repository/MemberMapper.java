@@ -22,4 +22,7 @@ public interface MemberMapper {
 
     @Select("SELECT * FROM member WHERE member_name = #{memberName}")
     MemberVO findByName(MemberVO member);
+
+    @Select("SELECT * FROM member WHERE member_id = #{memberId}")
+    MemberVO findById(int memberId);
 }

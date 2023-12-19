@@ -6,5 +6,4 @@ import lombok.Data;
 public class BorrowRequestDto {
     private String memberName;
     private int bookId;
-
 }

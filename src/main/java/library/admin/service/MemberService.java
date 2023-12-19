@@ -32,6 +32,13 @@ public class MemberService {
         }else return findMember;
     }
 
+    /**
+     * 식별자로 회원 조회
+     */
+    public MemberVO findMemberbyId(int memberId){
+        return memberMapper.findById(memberId);
+    }
+
     public void validateDuplicateMember(MemberVO member){
         if(memberMapper.findByName(member) != null){
             throw new IllegalArgumentException("이미 존재하는 회원입니다.");

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>도서관리시스템</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- JS here -->
+    <script th:src="@{/js/api.js}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/default.css}">
+
+    <!-- 각 페이지의 script가 작성될 위치-->
+    <th:block layout:fragment="script"></th:block>
+    <!-- 각 페이지의 css가 작성될 위치 -->
+    <th:block layout:fragment="css"></th:block>
+</head>
+<body>
+
+<div th:replace="~{fragments/header::header}"></div>
+<div layout:fragment="content" class="content"></div>
+
+</body>
+</html>

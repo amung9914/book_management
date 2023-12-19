@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<div layout:fragment="css">
+    <style>
+        body {
+            background: linear-gradient(to right, rgb(244, 254, 229), rgb(193, 229, 221))
+        }
+        #record-table-card{
+            padding: 10px;
+        }
+
+    </style>
+</div>
+<div layout:fragment="script">
+    <script th:src="@{/js/detailBook.js}"></script>
+</div>
+
+<div layout:fragment="content">
+
+    <div class="container">
+        <div class="row-6">
+            <div class="card">
+                <div class="card-body">
+                    <input type="hidden" id="book-id" th:value="${bookId}">
+                    <h5 class="card-title" id="bookName">스프링 부트 쇼핑몰 프로젝트 with JPA</h5>
+                    <p class="card-text" id="author">변구훈</p>
+                    <button id="status" class="btn btn-warning">대출가능</button>
+                    <a class="btn btn-light" th:href="@{/updateForm/{bookId}(bookId=${bookId})}">수정하기</a>
+                    <button id="record" class="btn btn-light">대출 이력 보기</button>
+                </div>
+            </div>
+            <br/>
+        </div>
+
+        <div class="row-6" id="ongoingView" style="display:none">
+            <div class="card" id="record-table-card">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">대출자</th>
+                        <th scope="col">대출시간</th>
+                        <th scope="col">반납시간</th>
+                    </tr>
+                    </thead>
+                    <tbody id="record-tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+</html>

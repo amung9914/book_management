@@ -22,17 +22,19 @@ public class BookService {
     /**
      * 도서를 등록한다
      */
-    public String register(BookVO book){
+    public void register(BookVO book){
         book.makeAvailable();
-        return getResult(bookMapper.register(book));
+        bookMapper.register(book);
     }
 
     /**
      * 등록된 도서를 수정한다
      * bookId,bookName,author 필요
      */
-    public String update(BookVO book){
-        return getResult(bookMapper.update(book));
+    public void update(BookVO book){
+        if(bookMapper.update(book)!=1){
+            throw new IllegalArgumentException("도서수정실패");
+        };
     }
 
 
@@ -51,15 +53,15 @@ public class BookService {
                                         .bookId(bookId)
                                         .memberId(member.getMemberId())
                                         .build();
-            return getResult(recordMapper.borrow(record));
+            recordMapper.borrow(record);
         };
-        return "FAILED";
+        throw new IllegalArgumentException("이미 대출된 도서입니다");
     }
 
     /**
      * 도서 반납처리
      */
-    public String returnBook(int bookId){
+    public void returnBook(int bookId){
         // book 상태변경
         BookVO book = BookVO.builder()
                 .bookId(bookId)
@@ -68,9 +70,9 @@ public class BookService {
         if(bookMapper.changeStatus(book)==1){
             // 대출 이력에 반납일시 기록
             RecordVO findRecord = recordMapper.findByBookId(bookId);
-            return getResult(recordMapper.returnRecord(findRecord));
+            recordMapper.returnRecord(findRecord);
         };
-        return "FAILED";
+        throw new IllegalArgumentException("도서 반납 실패");
     }
 
 
@@ -81,7 +83,8 @@ public class BookService {
         return bookMapper.bookList();
     }
 
-    private String getResult(int result){
-        return result==1? "SUCCESS" : "FAILED";
+    public BookVO detailBook(int bookId){
+        return bookMapper.detailBook(bookId);
     }
+
 }

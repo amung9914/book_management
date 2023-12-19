@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<div layout:fragment="css">
+    <style>
+        body {
+            background: linear-gradient(to right, rgb(244, 254, 229), rgb(193, 229, 221))
+        }
+        .card.bg-dark{
+            margin: 50px;
+        }
+        .mb-3{
+            margin: 30px;
+        }
+        #submit-button{
+            margin-top: 20px;
+        }
+    </style>
+</div>
+
+<div layout:fragment="content">
+    <section class="d-flex vh-100">
+        <div class="container-fluid row justify-content-center align-content-center">
+            <div class="card bg-dark w-50" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+                    <h2 class="text-white">도서 등록</h2>
+
+                    <div class = "mb-2">
+                        <form id="create-book-form">
+                            <div class="mb-3">
+                                <label class="form-label text-white">책제목</label>
+                                <input type="text" class="form-control" id="bookName">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-white">저자</label>
+                                <input type="text" class="form-control" id="author">
+                            </div>
+
+                            <button type="submit" id="submit-button" class="btn btn-light">등록</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</html>

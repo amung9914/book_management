@@ -17,6 +17,9 @@ public interface BookMapper {
     @Select("SELECT * FROM book ORDER BY book_id DESC")
     List<BookVO> bookList();
 
+    @Select("SELECT * FROM book WHERE book_id = #{bookId}")
+    BookVO detailBook(int bookId);
+
     /**
      * 도서를 등록한다
      */
@@ -34,5 +37,7 @@ public interface BookMapper {
      */
     @Update("UPDATE book SET status = #{status} WHERE book_id = #{bookId}")
     int changeStatus(BookVO book);
+
+
 
 }
