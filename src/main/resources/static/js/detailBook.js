@@ -23,8 +23,37 @@ document.addEventListener('DOMContentLoaded', function(){
 
     httpRequestGet(`/detailView/${document.getElementById("book-id").value}`,successForDetail,fail)
 
+    /* 도서 대출 관련 코드입니다 */
+    const borrowForm = document.getElementById("borrow-form");
+    const available  =  document.getElementsByClassName('btn-warning');
+    if(available){
+        document.getElementById("borrowBtn").addEventListener('click',function (){
+            // 대출form 표시
+            borrowForm.style.display = (borrowForm.style.display === 'none')? 'block':'none';
+        })
+    }
 
+    const bookId = document.getElementById("book-id").value;
+    borrowForm.addEventListener('submit',event => {
+        event.preventDefault();
 
+        body = JSON.stringify({
+            "bookId" : bookId,
+            "memberName" : document.getElementById("memberName").value,
+        });
+
+        function success(){
+            alert("도서 대출이 완료되었습니다.");
+            location.replace("/");
+        }
+        function fail(){
+            alert("도서 대출이 실패했습니다.");
+            location.replace("/");
+        }
+
+        httpRequest("POST","/borrow",body,success,fail);
+
+    });
 
 
     /* 대출 이력 api 관련 코드입니다 */
@@ -42,7 +71,10 @@ document.addEventListener('DOMContentLoaded', function(){
             responseData.forEach(record =>{
 
                 const formattedBorrowTime = getFormattedTime(new Date(record.borrowTime));
-                const formattedReturnTime = getFormattedTime(new Date(record.returnTime));
+                let formattedReturnTime = getFormattedTime(new Date(record.returnTime));
+                if(formattedReturnTime==='1970. 01. 01. 오전 09:00:00'){
+                    formattedReturnTime = '현재 대출중';
+                }
 
                 const newTr = document.createElement('tr');
 

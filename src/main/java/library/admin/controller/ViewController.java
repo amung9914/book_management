@@ -42,4 +42,9 @@ public class ViewController {
         return "/book/updateBookForm";
     }
 
+    @GetMapping("/returnForm")
+    public String returnForm(){
+        return "/book/returnForm";
+    }
+
 }

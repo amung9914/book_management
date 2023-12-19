@@ -26,6 +26,6 @@ public interface RecordMapper {
     @Update("UPDATE record SET return_time = NOW() WHERE record_id = #{recordId}")
     int returnRecord(RecordVO record);
 
-    @Select("SELECT * FROM record WHERE book_id = #{bookId}")
+    @Select("SELECT * FROM record WHERE book_id = #{bookId} AND return_time IS NULL")
     RecordVO findByBookId(int bookId);
 }

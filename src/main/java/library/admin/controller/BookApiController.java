@@ -56,6 +56,18 @@ public class BookApiController {
     }
 
     /**
+     * 대출중인 도서 목록을 출력
+     */
+    @GetMapping("/borrowList")
+    public ListResult<List<BookListDto>> getBorrowList(){
+        List<BookVO> bookList = bookService.borrowList();
+        List<BookListDto> borrowList = bookList.stream().map(o -> new BookListDto(o))
+                .toList();
+        return new ListResult(borrowList.size(),borrowList);
+    }
+
+
+    /**
      * 도서 세부 정보 조회
      */
     @GetMapping("/detailView/{bookId}")
@@ -63,6 +75,18 @@ public class BookApiController {
         BookVO bookVO = bookService.detailBook(bookId);
         BookDto bookDto = new BookDto(bookVO);
         return new Result(bookDto);
+    }
+
+    /**
+     * 도서 수정
+     */
+    @PutMapping("/book")
+    public Result<String> updateBook(@RequestBody @Valid UpdateBookRequest request){
+
+        bookService.update(BookVO.builder().bookId(request.getBookId())
+                .bookName(request.getBookName())
+                .author(request.getAuthor()).build());
+        return new Result(request.getBookName());
     }
 
     /**
@@ -82,12 +106,23 @@ public class BookApiController {
        return new Result(resultList);
     }
 
-
-    @PostMapping
-    public String borrow(@RequestBody BorrowRequestDto request){
+    /**
+     * 도서 대출 처리
+     */
+    @PostMapping("/borrow")
+    public Result<String> borrow(@RequestBody BorrowRequestDto request){
         MemberVO findMember = memberService.findMemberbyName(request.getMemberName());
         bookService.borrow(request.getBookId(),findMember);
-        return "";
+        return new Result(request.getMemberName());
+    }
+
+    /**
+     * 도서 반납 처리
+     */
+    @PutMapping("/borrow")
+    public Result<String> returnBook(@RequestBody ReturnRequestDto request){
+        bookService.returnBook(request.getBookId());
+        return new Result(request.getBookId());
     }
 
     @Data
@@ -124,5 +159,18 @@ public class BookApiController {
         }
 
     }
+    @Data
+    static private class UpdateBookRequest {
 
+        private int bookId;
+        @NotEmpty
+        private String bookName;
+        @NotEmpty
+        private String author;
+    }
+
+    @Data
+    static private class ReturnRequestDto {
+        private int bookId;
+    }
 }

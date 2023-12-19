@@ -41,7 +41,7 @@ public class BookService {
     /**
      * 도서 대출처리
      */
-    public String borrow(int bookId, MemberVO member){
+    public void borrow(int bookId, MemberVO member){
         // book 상태변경
         BookVO book = BookVO.builder()
                         .bookId(bookId)
@@ -54,8 +54,10 @@ public class BookService {
                                         .memberId(member.getMemberId())
                                         .build();
             recordMapper.borrow(record);
+        }else{
+            throw new IllegalArgumentException("이미 대출된 도서입니다");
         };
-        throw new IllegalArgumentException("이미 대출된 도서입니다");
+
     }
 
     /**
@@ -71,8 +73,10 @@ public class BookService {
             // 대출 이력에 반납일시 기록
             RecordVO findRecord = recordMapper.findByBookId(bookId);
             recordMapper.returnRecord(findRecord);
+        }else{
+            throw new IllegalArgumentException("도서 반납 실패");
         };
-        throw new IllegalArgumentException("도서 반납 실패");
+
     }
 
 
@@ -81,6 +85,13 @@ public class BookService {
      */
     public List<BookVO> bookList(){
         return bookMapper.bookList();
+    }
+
+    /**
+     * 대출중인 도서 목록 출력
+     */
+    public List<BookVO> borrowList(){
+        return bookMapper.borrowList();
     }
 
     public BookVO detailBook(int bookId){

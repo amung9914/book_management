@@ -38,6 +38,6 @@ public interface BookMapper {
     @Update("UPDATE book SET status = #{status} WHERE book_id = #{bookId}")
     int changeStatus(BookVO book);
 
-
-
+    @Select("SELECT * FROM book WHERE status = 'BORROWED'")
+    List<BookVO> borrowList();
 }
