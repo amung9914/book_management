@@ -89,7 +89,7 @@ class BookServiceTest {
         bookService.borrow(bookId,member);
 
         // then
-        Assertions.assertThat(bookService.bookList().get(0).getStatus()).isEqualTo("BORROWED");
+        Assertions.assertThat(bookService.bookList().get(0).getBookStatus()).isEqualTo("BORROWED");
         Assertions.assertThat(recordMapper.findByBookId(bookId).getBorrowTime()).isBefore(LocalDateTime.now());
     }
 
@@ -111,7 +111,7 @@ class BookServiceTest {
         bookService.returnBook(bookId);
 
         // then
-        Assertions.assertThat(bookService.bookList().get(0).getStatus()).isEqualTo("AVAILABLE");
+        Assertions.assertThat(bookService.bookList().get(0).getBookStatus()).isEqualTo("AVAILABLE");
         Assertions.assertThat(recordMapper.findByBookId(bookId).getReturnTime()).isBefore(LocalDateTime.now());
     }
 

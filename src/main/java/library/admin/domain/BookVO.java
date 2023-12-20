@@ -12,28 +12,28 @@ public class BookVO {
     private int bookId;
     private String bookName;
     private String author;
-    private String status;
+    private String bookStatus;
 
     @Builder
-    public BookVO(int bookId, String bookName, String author, String status) {
+    public BookVO(int bookId, String bookName, String author, String bookStatus) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.author = author;
-        this.status = status;
+        this.bookStatus = bookStatus;
     }
 
     /**
      * 책 상태 변경 매서드(대출)
      */
     public void borrowBook(){
-        this.status = "BORROWED";
+        this.bookStatus = "BORROWED";
     }
 
     /**
      * 책 상태 변경 매서드(반납)
      */
     public void makeAvailable(){
-        this.status = "AVAILABLE";
+        this.bookStatus = "AVAILABLE";
     }
 
 }

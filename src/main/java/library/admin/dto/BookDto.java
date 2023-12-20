@@ -13,6 +13,6 @@ public class BookDto {
     public BookDto(BookVO book) {
         this.bookName = book.getBookName();
         this.author = book.getAuthor();
-        this.status = book.getStatus();
+        this.status = book.getBookStatus();
     }
 }

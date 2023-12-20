@@ -8,28 +8,49 @@
 </div>
 <div layout:fragment="css">
     <style>
-        #total-count, .col-form-label{
+        #total-count, #semi-count {
+            margin: 30px;
+        }
+        .col-form-label{
             margin-left: 30px;
+        }
+        body {
+            background: linear-gradient(to right, rgb(244, 254, 229), rgb(193, 229, 221))
+        }
+        #memberName{
+            width: fit-content;
+        }
+
+        #wrap-card{
+            margin: 20px;
+        }
+
+        #background{
+            background: white;
+            padding : 20px;
+            margin-top: 30px;
         }
     </style>
 </div>
     <div layout:fragment="content">
-        <div class="container" id="root-container">
-            <form class="row g-3" id="borrow-form">
-                <div class="col">
-                    <label class="col-form-label">신청자 아이디</label>
+        <div class="container" id="background">
+            <div class="card bg-white w-50" id="wrap-card">
+                <div class="card-body text-center">
+                    <form class="row" id="return-form">
+                        <div class="col">
+                            <label class="col-form-label">신청자</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="memberName" placeholder="아이디를 입력해주세요">
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-dark">검색</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="col">
-                    <input type="text" class="form-control" id="memberName" placeholder="아이디를 입력해주세요">
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-outline-dark">검색</button>
-                </div>
-                <div class="col">
-                </div>
-                <div class="col">
-                </div>
-            </form>
+            </div>
+            <div class="container" id="root-container">
+            </div>
         </div>
     </div>
 </html>

@@ -66,6 +66,22 @@ public class BookApiController {
         return new ListResult(borrowList.size(),borrowList);
     }
 
+    /**
+     * 특정 회원의 대출중인 도서 목록을 출력
+     */
+    @GetMapping("/borrowList/{memberName}")
+    public ListResult<List<BookListDto>> getBorrowList(@PathVariable String memberName){
+
+        MemberVO findMember = memberService.findMemberbyName(memberName);
+        List<BookVO> bookList = bookService.borrowListByMember(findMember);
+        if(bookList.isEmpty()){
+            throw new IllegalArgumentException("현재 대출중인 도서가 없습니다");
+        }
+        List<BookListDto> borrowList = bookList.stream().map(o -> new BookListDto(o))
+                .toList();
+        return new ListResult(borrowList.size(),borrowList);
+    }
+
 
     /**
      * 도서 세부 정보 조회

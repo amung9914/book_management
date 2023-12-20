@@ -4,6 +4,7 @@ import library.admin.domain.BookVO;
 import library.admin.domain.MemberVO;
 import library.admin.domain.RecordVO;
 import library.admin.repository.BookMapper;
+import library.admin.repository.MemberMapper;
 import library.admin.repository.RecordMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -92,6 +93,13 @@ public class BookService {
      */
     public List<BookVO> borrowList(){
         return bookMapper.borrowList();
+    }
+
+    /**
+     * 특정인이 대출중인 도서 목록 출력
+     */
+    public List<BookVO> borrowListByMember(MemberVO member){
+        return bookMapper.borrowListByMember(member);
     }
 
     public BookVO detailBook(int bookId){

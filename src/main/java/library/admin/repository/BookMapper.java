@@ -1,6 +1,7 @@
 package library.admin.repository;
 
 import library.admin.domain.BookVO;
+import library.admin.domain.MemberVO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface BookMapper {
     /**
      * 도서를 등록한다
      */
-    @Insert("INSERT INTO book(book_name,author,status) VALUES(#{bookName},#{author},'AVAILABLE')")
+    @Insert("INSERT INTO book(book_name,author,book_status) VALUES(#{bookName},#{author},'AVAILABLE')")
     int register(BookVO book);
 
     /**
@@ -35,9 +36,17 @@ public interface BookMapper {
     /**
      * 도서 상태 변경
      */
-    @Update("UPDATE book SET status = #{status} WHERE book_id = #{bookId}")
+    @Update("UPDATE book SET book_status = #{bookStatus} WHERE book_id = #{bookId}")
     int changeStatus(BookVO book);
 
-    @Select("SELECT * FROM book WHERE status = 'BORROWED'")
+    @Select("SELECT * FROM book WHERE book_status = 'BORROWED'")
     List<BookVO> borrowList();
+
+
+    /**
+     * 특정인이 현재 대출중인 도서
+     */
+    @Select("SELECT b.* FROM record r, book b WHERE  r.book_id = b.book_id " +
+            " AND r.return_time IS NULL AND r.member_id = #{memberId}")
+    List<BookVO> borrowListByMember(MemberVO member);
 }
