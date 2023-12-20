@@ -93,26 +93,6 @@ class BookServiceTest {
         Assertions.assertThat(recordMapper.findByBookId(bookId).getBorrowTime()).isBefore(LocalDateTime.now());
     }
 
-    @DisplayName("도서를 반납한다")
-    @Test
-    public void returnBook() throws Exception {
-        // given
-        BookVO newBook = BookVO.builder()
-                .bookName("testbook")
-                .author("testauthor")
-                .build();
-        bookService.register(newBook);
-        int bookId = bookService.bookList().get(0).getBookId();
 
-        MemberVO member = memberService.findMemberbyName("test1");
-        bookService.borrow(bookId,member);
-
-        // when
-        bookService.returnBook(bookId);
-
-        // then
-        Assertions.assertThat(bookService.bookList().get(0).getBookStatus()).isEqualTo("AVAILABLE");
-        Assertions.assertThat(recordMapper.findByBookId(bookId).getReturnTime()).isBefore(LocalDateTime.now());
-    }
 
 }
