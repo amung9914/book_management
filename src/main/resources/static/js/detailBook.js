@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function(){
         const responseData = response.data;
         document.getElementById("bookName").innerText = responseData.bookName;
         document.getElementById("author").innerText = responseData.author;
+        document.getElementById("bookImg").src = responseData.url;
         document.getElementById("status").innerText = responseData.status === 'AVAILABLE'?'대출가능':'대출불가';
         const bookDetail = document.createElement('div');
         bookDetail.innerHTML = responseData.content;

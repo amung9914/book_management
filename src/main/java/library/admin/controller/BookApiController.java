@@ -15,10 +15,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,15 +32,33 @@ public class BookApiController {
      * 도서를 등록하는 메서드
      */
     @PostMapping("/book")
-    public Result<String> createBook(@RequestBody @Valid CreateBookRequest request){
+    public Result<String> createBook(@ModelAttribute @Valid CreateBookRequest request,
+                                     @RequestParam MultipartFile img){
         // 작성하기
         BookVO newBook = BookVO.builder()
                 .bookName(request.getBookName())
                 .author(request.getAuthor())
                 .content(request.getContent())
                 .build();
-        bookService.register(newBook);
+        bookService.register(newBook,img);
+        int bookId = bookService.findBookIdByName(newBook);
         return new Result(newBook.getBookName());
+    }
+
+
+    /**
+     * 도서 수정
+     */
+    @PutMapping("/book")
+    public Result<String> updateBook(@ModelAttribute @Valid UpdateBookRequest request,
+                                     @RequestParam MultipartFile img){
+
+        bookService.update(BookVO.builder().bookId(request.getBookId())
+                .bookName(request.getBookName())
+                .author(request.getAuthor())
+                .content(request.getContent())
+                .build(),img);
+        return new Result(request.getBookName());
     }
 
     /**
@@ -94,19 +112,6 @@ public class BookApiController {
         return new Result(bookDto);
     }
 
-    /**
-     * 도서 수정
-     */
-    @PutMapping("/book")
-    public Result<String> updateBook(@RequestBody @Valid UpdateBookRequest request){
-
-        bookService.update(BookVO.builder().bookId(request.getBookId())
-                .bookName(request.getBookName())
-                .author(request.getAuthor())
-                .content(request.getContent())
-                .build());
-        return new Result(request.getBookName());
-    }
 
     /**
      * 도서 대출 이력 조회

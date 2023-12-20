@@ -29,12 +29,12 @@ document.addEventListener('DOMContentLoaded', function(){
             // tinymce 함수
             let content = tinymce.activeEditor.getContent();
 
-            body = JSON.stringify({
-                "bookId" : bookId,
-                "bookName" : document.getElementById("bookName").value,
-                "author" : document.getElementById("author").value,
-                "content" : content
-            });
+            const formData = new FormData();
+            formData.append("bookId",bookId);
+            formData.append("bookName",document.getElementById("bookName").value);
+            formData.append("author",document.getElementById("author").value);
+            formData.append("content",content);
+            formData.append("img",document.getElementById("img").files[0]);
 
             function success(){
                 alert("도서 수정이 완료되었습니다.");
@@ -45,12 +45,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 location.replace("/");
             }
 
-            httpRequest("PUT","/book",body,success,fail);
+            httpRequestForImg("PUT","/book",formData,success,fail);
         });
-    } // joinForm end
-
-
-
+    } // updateForm end
 
 
 });

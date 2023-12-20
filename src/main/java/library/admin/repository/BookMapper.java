@@ -24,13 +24,13 @@ public interface BookMapper {
     /**
      * 도서를 등록한다
      */
-    @Insert("INSERT INTO book(book_name,author,book_status,content) VALUES(#{bookName},#{author},'AVAILABLE',#{content})")
+    @Insert("INSERT INTO book(book_name,author,book_status,content,url) VALUES(#{bookName},#{author},'AVAILABLE',#{content},#{url})")
     int register(BookVO book);
 
     /**
      * 등록된 도서를 수정한다
      */
-    @Update("UPDATE book SET book_name = #{bookName}, author = #{author}, content = #{content} WHERE book_id = #{bookId}")
+    @Update("UPDATE book SET book_name = #{bookName}, author = #{author}, content = #{content}, url = #{url} WHERE book_id = #{bookId}")
     int update(BookVO book);
 
     /**
@@ -38,6 +38,10 @@ public interface BookMapper {
      */
     @Update("UPDATE book SET book_status = #{bookStatus} WHERE book_id = #{bookId}")
     int changeStatus(BookVO book);
+
+    @Select("SELECT book_id FROM book WHERE book_name = #{bookName}")
+    int findBookIdByName(BookVO book);
+
 
     @Select("SELECT * FROM book WHERE book_status = 'BORROWED'")
     List<BookVO> borrowList();

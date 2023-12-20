@@ -14,15 +14,17 @@ public class BookVO {
     private String author;
     private String bookStatus;
     private String content;
+    private String url;
 
 
     @Builder
-    public BookVO(int bookId, String bookName, String author, String bookStatus, String content) {
+    public BookVO(int bookId, String bookName, String author, String bookStatus, String content, String url) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.author = author;
         this.bookStatus = bookStatus;
         this.content = content;
+        this.url = url;
     }
 
     /**
@@ -39,4 +41,10 @@ public class BookVO {
         this.bookStatus = "AVAILABLE";
     }
 
+    /**
+     * 사진 url 추가 메서드
+     */
+    public void updateUrl(String url) {
+        this.url = url;
+    }
 }

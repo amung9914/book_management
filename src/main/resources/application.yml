@@ -7,3 +7,14 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+cloud:
+  aws:
+    credentials:
+      accessKey: //
+      secretKey: //
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    s3:
+      bucket: //

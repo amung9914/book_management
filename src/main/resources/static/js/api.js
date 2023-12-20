@@ -33,11 +33,12 @@ document.addEventListener('DOMContentLoaded', function(){
             // tinymce 함수
             let content = tinymce.activeEditor.getContent();
 
-            body = JSON.stringify({
-                "bookName" : document.getElementById("bookName").value,
-                "author" : document.getElementById("author").value,
-                "content": content
-            });
+            const formData = new FormData();
+            formData.append("bookName",document.getElementById("bookName").value);
+            formData.append("author",document.getElementById("author").value);
+            formData.append("content",content);
+            formData.append("img",document.getElementById("img").files[0]);
+
 
             function success(){
                 alert("도서가 등록되었습니다.");
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 location.replace("/");
             }
 
-            httpRequest("POST","book",body,success,fail);
+            httpRequestForImg("POST","book",formData,success,fail);
         });
     } // create-book-form end
 });
@@ -60,6 +61,22 @@ function httpRequest(method,url,body,success,fail){
         headers: {
             'Content-Type':'application/json'
         },
+        body: body,
+    }).then(response =>{
+        if(response.status ===200 || response.status ===201){
+            return success();
+        }else{
+            fail();
+        }
+
+    });
+}
+
+
+// HTTP요청을 보내는 함수(FormData)
+function httpRequestForImg(method,url,body,success,fail){
+    fetch(url, {
+        method: method,
         body: body,
     }).then(response =>{
         if(response.status ===200 || response.status ===201){

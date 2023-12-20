@@ -6,9 +6,11 @@ import library.admin.domain.RecordVO;
 import library.admin.repository.BookMapper;
 import library.admin.repository.MemberMapper;
 import library.admin.repository.RecordMapper;
+import library.admin.util.S3Uploader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,20 +21,37 @@ public class BookService {
 
     private final BookMapper bookMapper;
     private final RecordMapper recordMapper;
+    private final S3Uploader s3Uploader;
 
     /**
      * 도서를 등록한다
      */
-    public void register(BookVO book){
+    public void register(BookVO book, MultipartFile file){
         book.makeAvailable();
+
+        String url = "";
+        if(file !=null) {
+            url = s3Uploader.uploadFileToS3(file,"static/library");
+            book.updateUrl(url);
+        }
         bookMapper.register(book);
+    }
+
+    public int findBookIdByName(BookVO book){
+        return bookMapper.findBookIdByName(book);
     }
 
     /**
      * 등록된 도서를 수정한다
      * bookId,bookName,author 필요
      */
-    public void update(BookVO book){
+    public void update(BookVO book, MultipartFile file){
+        String url = "";
+        if(file !=null) {
+            url = s3Uploader.uploadFileToS3(file,"static/library");
+            book.updateUrl(url);
+
+        }
         if(bookMapper.update(book)!=1){
             throw new IllegalArgumentException("도서수정실패");
         };

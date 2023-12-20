@@ -10,7 +10,8 @@ CREATE TABLE book 	  -- 책 테이블
     book_name    VARCHAR(40) NOT NULL unique,
     author       VARCHAR(20) NOT NULL,
     book_status  VARCHAR(10) NOT NULL,
-    content      TEXT
+    content      TEXT,
+    url          VARCHAR(200)
 );
 CREATE TABLE record  -- 대출이력 테이블
 (
