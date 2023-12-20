@@ -24,13 +24,13 @@ public interface BookMapper {
     /**
      * 도서를 등록한다
      */
-    @Insert("INSERT INTO book(book_name,author,book_status) VALUES(#{bookName},#{author},'AVAILABLE')")
+    @Insert("INSERT INTO book(book_name,author,book_status,content) VALUES(#{bookName},#{author},'AVAILABLE',#{content})")
     int register(BookVO book);
 
     /**
      * 등록된 도서를 수정한다
      */
-    @Update("UPDATE book SET book_name = #{bookName}, author = #{author} WHERE book_id = #{bookId}")
+    @Update("UPDATE book SET book_name = #{bookName}, author = #{author}, content = #{content} WHERE book_id = #{bookId}")
     int update(BookVO book);
 
     /**

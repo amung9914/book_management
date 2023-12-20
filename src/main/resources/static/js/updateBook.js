@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function(){
         const responseData = response.data;
         document.getElementById("bookName").value = responseData.bookName;
         document.getElementById("author").value = responseData.author;
+        document.getElementById("content").innerText = responseData.content;
 
     }
 
@@ -25,10 +26,14 @@ document.addEventListener('DOMContentLoaded', function(){
         updateForm.addEventListener('submit',function (event){
             event.preventDefault();
 
+            // tinymce 함수
+            let content = tinymce.activeEditor.getContent();
+
             body = JSON.stringify({
                 "bookId" : bookId,
                 "bookName" : document.getElementById("bookName").value,
-                "author" : document.getElementById("author").value
+                "author" : document.getElementById("author").value,
+                "content" : content
             });
 
             function success(){

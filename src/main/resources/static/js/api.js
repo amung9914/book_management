@@ -30,9 +30,13 @@ document.addEventListener('DOMContentLoaded', function(){
         createBook.addEventListener('submit',function (event){
             event.preventDefault();
 
+            // tinymce 함수
+            let content = tinymce.activeEditor.getContent();
+
             body = JSON.stringify({
                 "bookName" : document.getElementById("bookName").value,
-                "author" : document.getElementById("author").value
+                "author" : document.getElementById("author").value,
+                "content": content
             });
 
             function success(){

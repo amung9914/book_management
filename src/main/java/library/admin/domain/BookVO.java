@@ -13,13 +13,16 @@ public class BookVO {
     private String bookName;
     private String author;
     private String bookStatus;
+    private String content;
+
 
     @Builder
-    public BookVO(int bookId, String bookName, String author, String bookStatus) {
+    public BookVO(int bookId, String bookName, String author, String bookStatus, String content) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.author = author;
         this.bookStatus = bookStatus;
+        this.content = content;
     }
 
     /**

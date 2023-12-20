@@ -9,7 +9,8 @@ CREATE TABLE book 	  -- 책 테이블
     book_id      INT primary key AUTO_INCREMENT,
     book_name    VARCHAR(40) NOT NULL unique,
     author       VARCHAR(20) NOT NULL,
-    book_status       VARCHAR(10) NOT NULL
+    book_status  VARCHAR(10) NOT NULL,
+    content      TEXT
 );
 CREATE TABLE record  -- 대출이력 테이블
 (

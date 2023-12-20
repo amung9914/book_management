@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById("bookName").innerText = responseData.bookName;
         document.getElementById("author").innerText = responseData.author;
         document.getElementById("status").innerText = responseData.status === 'AVAILABLE'?'대출가능':'대출불가';
+        const bookDetail = document.createElement('div');
+        bookDetail.innerHTML = responseData.content;
+        document.getElementById("content-card").appendChild(bookDetail);
 
         if(responseData.status!=='AVAILABLE'){
             document.getElementById("status").classList.remove('btn-warning');

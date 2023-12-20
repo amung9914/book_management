@@ -37,6 +37,7 @@ public class BookApiController {
         BookVO newBook = BookVO.builder()
                 .bookName(request.getBookName())
                 .author(request.getAuthor())
+                .content(request.getContent())
                 .build();
         bookService.register(newBook);
         return new Result(newBook.getBookName());
@@ -101,7 +102,9 @@ public class BookApiController {
 
         bookService.update(BookVO.builder().bookId(request.getBookId())
                 .bookName(request.getBookName())
-                .author(request.getAuthor()).build());
+                .author(request.getAuthor())
+                .content(request.getContent())
+                .build());
         return new Result(request.getBookName());
     }
 
@@ -160,6 +163,7 @@ public class BookApiController {
         private String bookName;
         @NotEmpty
         private String author;
+        private String content;
     }
 
     @Data
@@ -183,6 +187,7 @@ public class BookApiController {
         private String bookName;
         @NotEmpty
         private String author;
+        private String content;
     }
 
     @Data
