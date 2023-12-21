@@ -13,8 +13,17 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById("content-card").appendChild(bookDetail);
 
         if(responseData.status!=='AVAILABLE'){
-            document.getElementById("status").classList.remove('btn-warning');
             document.getElementById("status").classList.add('btn-secondary');
+        }else{
+            document.getElementById("status").classList.add('btn-warning');
+        }
+        let borrowForm = document.getElementById("borrow-form");
+
+        if(responseData.status === 'AVAILABLE'){
+            document.getElementById("borrowBtn").addEventListener('click',function (){
+                // 대출form 표시
+                borrowForm.style.display = (borrowForm.style.display === 'none')? 'block':'none';
+            })
         }
     }
 
@@ -28,15 +37,8 @@ document.addEventListener('DOMContentLoaded', function(){
     httpRequestGet(`/detailView/${document.getElementById("book-id").value}`,successForDetail,fail)
 
     /* 도서 대출 관련 코드입니다 */
-    const borrowForm = document.getElementById("borrow-form");
-    const available  =  document.getElementsByClassName('btn-warning');
-    if(available){
-        document.getElementById("borrowBtn").addEventListener('click',function (){
-            // 대출form 표시
-            borrowForm.style.display = (borrowForm.style.display === 'none')? 'block':'none';
-        })
-    }
 
+    let borrowForm = document.getElementById("borrow-form");
     const bookId = document.getElementById("book-id").value;
     borrowForm.addEventListener('submit',event => {
         event.preventDefault();
