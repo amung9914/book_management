@@ -43,7 +43,7 @@ public interface BookMapper {
     int findBookIdByName(BookVO book);
 
 
-    @Select("SELECT * FROM book WHERE book_status = 'BORROWED'")
+    @Select("SELECT * FROM book WHERE book_status = 'BORROWED' ORDER BY book_id DESC")
     List<BookVO> borrowList();
 
 
@@ -51,6 +51,6 @@ public interface BookMapper {
      * 특정인이 현재 대출중인 도서
      */
     @Select("SELECT b.* FROM record r, book b WHERE  r.book_id = b.book_id " +
-            " AND r.return_time IS NULL AND r.member_id = #{memberId}")
+            " AND r.return_time IS NULL AND r.member_id = #{memberId} ORDER BY record_id DESC")
     List<BookVO> borrowListByMember(MemberVO member);
 }
