@@ -178,7 +178,7 @@ function checkRegex(elP,valP,regexP,messageP){
     }
 }
 
-// HTTP GET 요청을 보내는 함수
+// 이메일 인증 관련 함수
 function httpRequestForMail(method,url,body,success,fail) {
     fetch(url, {
         method: method,

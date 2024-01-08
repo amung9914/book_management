@@ -20,6 +20,11 @@ public class ViewController {
         return "createMemberForm";
     }
 
+    @GetMapping("/login")
+    public String login(){
+        return "loginForm";
+    }
+
     @GetMapping("/createBook")
     public String createBook(){
         return "createBookForm";

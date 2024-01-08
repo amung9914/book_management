@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<div layout:fragment="css">
+    <style>
+        body {
+            background: linear-gradient(to right, rgb(244, 254, 229), rgb(193, 229, 221))
+        }
+        .card.bg-dark{
+            margin: 50px;
+        }
+        .notice{
+            color: red;
+        }
+
+    </style>
+</div>
+<div layout:fragment="script">
+    <script th:src="@{/js/loginForm.js}"></script>
+</div>
+
+<div layout:fragment="content">
+    <section class="d-flex vh-100">
+        <div class="container-fluid row justify-content-center align-content-center">
+            <div class="card bg-dark" style="border-radius: 1rem; width: 500px">
+                <div class="card-body p-5 text-center">
+                    <h2 class="text-white">SIGN IN</h2>
+                    <p class="text-white-50 mt-2 mb-5">로그인</p>
+
+                    <div class = "mb-2">
+                        <form id="login-form">
+                            <div class="mb-3">
+                                <label class="form-label text-white">이메일</label>
+                                <input type="text" class="form-control" id="memberName" placeholder="이메일">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-white" >비밀번호</label>
+                                <input type="password" class="form-control" id="password" placeholder="비밀번호">
+                            </div>
+                            <div class="mb-3" id="elp"></div>
+                            <button type="submit" class="btn btn-light">로그인</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+</html>
