@@ -4,6 +4,18 @@ spring:
     url: jdbc:mysql://localhost:3306/camping?serverTimezone=Asia/Seoul
     username: camping
     password: 1234
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: //
+    password: //
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
@@ -18,3 +30,4 @@ cloud:
       auto: false
     s3:
       bucket: //
+

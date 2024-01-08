@@ -1,28 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
 
-    const joinForm = document.getElementById('join-form');
-    if(joinForm){
-        /* 회원 가입 */
-        document.getElementById('join-form').addEventListener('submit',function (event){
-            event.preventDefault();
 
-            body = JSON.stringify({
-                "memberName" : document.getElementById("memberName").value,
-                "password" : document.getElementById("password").value
-            });
-
-            function success(){
-                alert("회원 가입이 완료되었습니다.");
-                location.replace("/");
-            }
-            function fail(){
-                alert("회원 가입이 실패했습니다.");
-                location.replace("/");
-            }
-
-            httpRequest("POST","member",body,success,fail);
-        });
-    } // joinForm end
 
     const createBook = document.getElementById('create-book-form');
     if(createBook){

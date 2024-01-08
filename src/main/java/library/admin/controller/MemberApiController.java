@@ -7,9 +7,7 @@ import library.admin.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,6 +26,15 @@ public class MemberApiController {
                 .build();
         memberService.join(newMember);
         return new Result(newMember.getMemberName());
+    }
+
+    /**
+     * 아이디 중복 검증
+     */
+    @GetMapping("/nameCheck/{memberName}")
+    public Result<Boolean> isCheck(@PathVariable String memberName){
+        memberService.isCheckForMemberName(memberName);
+        return new Result(true);
     }
 
     @Data

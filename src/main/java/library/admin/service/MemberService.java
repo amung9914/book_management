@@ -33,6 +33,16 @@ public class MemberService {
     }
 
     /**
+     *  회원가입가능여부
+     */
+    public void isCheckForMemberName(String name){
+        MemberVO findMember = memberMapper.findByName(MemberVO.builder().name(name).build());
+        if(findMember != null){
+            throw new IllegalArgumentException("사용중인 이메일입니다.");
+        }
+    }
+
+    /**
      * 식별자로 회원 조회
      */
     public MemberVO findMemberbyId(int memberId){

@@ -11,13 +11,22 @@
         .card.bg-dark{
             margin: 50px;
         }
+        .notice{
+            color: red;
+        }
+        .line{
+            display: flex;
+        }
     </style>
+</div>
+<div layout:fragment="script">
+    <script th:src="@{/js/joinForm.js}"></script>
 </div>
 
 <div layout:fragment="content">
     <section class="d-flex vh-100">
         <div class="container-fluid row justify-content-center align-content-center">
-            <div class="card bg-dark" style="border-radius: 1rem;">
+            <div class="card bg-dark" style="border-radius: 1rem; width: 500px">
                 <div class="card-body p-5 text-center">
                     <h2 class="text-white">SIGN UP</h2>
                     <p class="text-white-50 mt-2 mb-5">회원 가입</p>
@@ -25,14 +34,30 @@
                     <div class = "mb-2">
                         <form id="join-form">
                             <div class="mb-3">
-                                <label class="form-label text-white">아이디</label>
-                                <input type="text" class="form-control" id="memberName">
+                                <label class="form-label text-white">이메일</label>
+                                <div class="line">
+                                    <input type="text" class="form-control" id="memberName" placeholder="이메일">
+                                    <button type="button" class="btn btn-warning btn-sm" id="mail_btn">이메일 인증</button>
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label text-white">비밀번호</label>
-                                <input type="password" class="form-control" id="password">
+                                <!-- 검증 결과를 출력할 박스모델 -->
+                                <div id="emailCodeWrap" class="line">
+                                    <input type="text" class="form-control" id="emailCode" placeholder="인증번호를 입력하세요"/>
+                                    <button type="button" class="btn btn-secondary btn-sm" id="emailAcceptBtn">인증완료</button>
+                                </div>
                             </div>
-
+                            <div class="mb-3">
+                                <label class="form-label text-white" >비밀번호</label>
+                                <input type="password" class="form-control" id="password" placeholder="비밀번호">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-white">비밀번호 확인</label>
+                                <input type="password" class="form-control" id="re_pw" placeholder="비밀번호확인">
+                            </div>
+                            <div class="mb-3" id="valid_name"></div>
+                            <div class="mb-3" id="elp"></div>
+                            <div class="mb-3" id="email_check"></div>
                             <button type="submit" class="btn btn-light">회원가입</button>
                         </form>
                     </div>
