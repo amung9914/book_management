@@ -48,7 +48,7 @@ public class BookApiController {
 
 
     /**
-     * 도서 수정
+     * 도서 수정 기능
      */
     @PutMapping("/book")
     public Result<String> updateBook(@ModelAttribute @Valid UpdateBookRequest request,
