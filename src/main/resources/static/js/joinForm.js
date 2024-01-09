@@ -17,9 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
         function success(){
             showMessage(validName,"이메일: 사용할 수 있는 이메일입니다",true);
             validEmail = true;
+            document.getElementById("mail_btn").disabled = false;
         }
         function fail(){
             showMessage(validName,"이메일: 사용할 수 없는 이메일입니다",false);
+            document.getElementById("mail_btn").disabled = true;
         }
 
         httpRequestGet("/signup/nameCheck/"+email.value,success,fail);
