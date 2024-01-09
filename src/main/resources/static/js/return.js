@@ -45,7 +45,7 @@ function success(response){
         author.textContent = `저자: ${book.author}`;
 
         // '반납하기' 링크 생성
-        bookId = book.bookId;
+        const bookId = book.bookId;
         const link = document.createElement('a');
         link.classList.add('btn', 'btn-warning');
         link.textContent = '반납하기';
