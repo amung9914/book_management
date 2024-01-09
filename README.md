@@ -39,7 +39,8 @@ Github에 push를 하면 바로 배포될 수 있도록 CI/CD를 구현하였습
 <b>이메일 인증 및 정규표현식을 이용한 회원가입 검증</b>
 
 - Google SMTP Mail을 이용하여 인증 번호를 포함한 메일 발송
-
+  
+![image](https://github.com/amung9914/book_management/assets/137124338/4565d6a7-20ca-40ea-80d5-0117e42969fb)
 - 이메일 중복여부 자동 검증
 - 이미 사용중인 이메일인 경우 [이메일 전송]버튼 비활성화
 - 인증번호 인증 후 회원가입 정상 처리 가능
