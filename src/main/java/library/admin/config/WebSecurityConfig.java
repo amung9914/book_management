@@ -38,7 +38,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/error","/login","/signup","/signup/**","/","/bookList","/detailView","/record","/mail","/member").permitAll()
+                        .requestMatchers("/error","/login","/signup","/signup/**","/","/bookList","/detailView/**","/record","/mail","/member","/detailBook/**").permitAll()
                         .requestMatchers("/css/**","/js/**").permitAll()
                         .requestMatchers(IMG_FILES).permitAll()
                         .requestMatchers("/createBook").hasRole("ADMIN")
