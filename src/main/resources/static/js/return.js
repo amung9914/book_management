@@ -4,7 +4,7 @@ httpRequestGet("/borrowList",success,fail);
 function fail(){
     const container = document.getElementById("root-container");
     if (container) {
-        container.innerHTML = "<h1>현재 대출중인 도서가 없습니다</h1>";
+        container.innerHTML = "<h3>현재 대출중인 도서가 없습니다</h3>";
     }
 }
 
@@ -12,7 +12,7 @@ function success(response){
     const responseData = response.data;
 
     const totalCount = document.createElement('p');
-    totalCount.textContent = `현재 대출 중인 도서 수는 ${response.count} 건입니다.`;
+    totalCount.textContent = `${response.name}님의 현재 대출 중인 도서 수는 ${response.count} 건입니다.`;
     totalCount.id = 'total-count';
 
     const rootContainer = document.getElementById("root-container");
@@ -83,6 +83,7 @@ function success(response){
     rootContainer.appendChild(container);
 
 }
+/*
 
 document.addEventListener('DOMContentLoaded', function() {
     const returnForm = document.getElementById("return-form");
@@ -112,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+*/
 
     // HTTP GET 요청을 보내는 함수
     function httpRequestGet(url,success,fail) {
@@ -130,10 +132,10 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     }
 
+/*
 
-/**
- *  특정 멤버의 대출 리스트
- */
+
+// 특정 멤버의 대출 리스트
 function successForMember(response){
     const responseData = response.data;
 
@@ -205,3 +207,4 @@ function successForMember(response){
     rootContainer.appendChild(container);
 
 }
+*/

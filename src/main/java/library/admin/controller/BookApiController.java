@@ -72,35 +72,24 @@ public class BookApiController {
         List<BookListDto> bookList = bookVOList.stream()
                 .map(o -> new BookListDto(o))
                 .toList();
-        return new ListResult(bookList.size(),bookList);
+        return new ListResult(null,bookList.size(),bookList);
     }
 
     /**
-     * 대출중인 도서 목록을 출력
+     * 회원의 대출중인 도서 목록을 출력
      */
     @GetMapping("/borrowList")
-    public ListResult<List<BookListDto>> getBorrowList(){
-        List<BookVO> bookList = bookService.borrowList();
-        List<BookListDto> borrowList = bookList.stream().map(o -> new BookListDto(o))
-                .toList();
-        return new ListResult(borrowList.size(),borrowList);
-    }
-
-    /**
-     * 특정 회원의 대출중인 도서 목록을 출력
-     */
-    @GetMapping("/borrowList/{memberName}")
-    public ListResult<List<BookListDto>> getBorrowList(@PathVariable String memberName){
-
-        MemberVO findMember = memberService.findMemberbyName(memberName);
+    public ListResult<List<BookListDto>> getBorrowList(Principal principal){
+        MemberVO findMember = memberService.findMemberbyName(principal.getName());
         List<BookVO> bookList = bookService.borrowListByMember(findMember);
         if(bookList.isEmpty()){
             throw new IllegalArgumentException("현재 대출중인 도서가 없습니다");
         }
         List<BookListDto> borrowList = bookList.stream().map(o -> new BookListDto(o))
                 .toList();
-        return new ListResult(borrowList.size(),borrowList);
+        return new ListResult(principal.getName(), borrowList.size(),borrowList);
     }
+
 
 
     /**
@@ -108,7 +97,6 @@ public class BookApiController {
      */
     @GetMapping("/detailView/{bookId}")
     public Result<BookDto> getDetailBook(@PathVariable int bookId){
-        System.out.println("bookId:"+bookId);
         BookVO bookVO = bookService.detailBook(bookId);
         BookDto bookDto = new BookDto(bookVO);
         return new Result(bookDto);
@@ -161,6 +149,7 @@ public class BookApiController {
     @Data
     @AllArgsConstructor
     static class ListResult<T>{
+        private String name;
         private int count;
         private T data;
     }
