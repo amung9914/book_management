@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showMessage(validName,"이메일: 사용할 수 없는 이메일입니다",false);
         }
 
-        httpRequestGet("/nameCheck/"+email.value,success,fail);
+        httpRequestGet("/signup/nameCheck/"+email.value,success,fail);
     });
 
 
@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const mailBtn = document.getElementById("mail_btn");
     mailBtn.addEventListener("click",function (){
-        console.log(validEmailForRegex);
         if(validEmailForRegex){
             data = JSON.stringify({
                 "mail" : document.getElementById("memberName").value

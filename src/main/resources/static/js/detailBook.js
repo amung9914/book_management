@@ -44,8 +44,7 @@ document.addEventListener('DOMContentLoaded', function(){
         event.preventDefault();
 
         body = JSON.stringify({
-            "bookId" : bookId,
-            "memberName" : document.getElementById("memberName").value,
+            "bookId" : bookId
         });
 
         function success(){

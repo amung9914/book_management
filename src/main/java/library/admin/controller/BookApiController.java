@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,6 +108,7 @@ public class BookApiController {
      */
     @GetMapping("/detailView/{bookId}")
     public Result<BookDto> getDetailBook(@PathVariable int bookId){
+        System.out.println("bookId:"+bookId);
         BookVO bookVO = bookService.detailBook(bookId);
         BookDto bookDto = new BookDto(bookVO);
         return new Result(bookDto);
@@ -134,10 +136,11 @@ public class BookApiController {
      * 도서 대출 처리
      */
     @PostMapping("/borrow")
-    public Result<String> borrow(@RequestBody BorrowRequestDto request){
-        MemberVO findMember = memberService.findMemberbyName(request.getMemberName());
+    public Result<String> borrow(@RequestBody BorrowRequestDto request, Principal principal){
+
+        MemberVO findMember = memberService.findMemberbyName(principal.getName());
         bookService.borrow(request.getBookId(),findMember);
-        return new Result(request.getMemberName());
+        return new Result(principal.getName());
     }
 
     /**

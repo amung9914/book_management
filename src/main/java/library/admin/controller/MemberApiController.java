@@ -7,6 +7,7 @@ import library.admin.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberApiController {
 
     private final MemberService memberService;
+    private final BCryptPasswordEncoder encoder;
 
     /**
      * 회원가입
@@ -22,7 +24,8 @@ public class MemberApiController {
     public Result<String> saveMember(@RequestBody @Valid CreateMemberRequest request){
         MemberVO newMember = MemberVO.builder()
                 .name(request.getMemberName())
-                .password(request.getPassword())
+                .password(encoder.encode(request.getPassword()))
+                .authority("USER")
                 .build();
         memberService.join(newMember);
         return new Result(newMember.getMemberName());
@@ -31,7 +34,7 @@ public class MemberApiController {
     /**
      * 아이디 중복 검증
      */
-    @GetMapping("/nameCheck/{memberName}")
+    @GetMapping("/signup/nameCheck/{memberName}")
     public Result<Boolean> isCheck(@PathVariable String memberName){
         memberService.isCheckForMemberName(memberName);
         return new Result(true);

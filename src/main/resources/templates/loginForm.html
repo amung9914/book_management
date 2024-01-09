@@ -18,7 +18,6 @@
     </style>
 </div>
 <div layout:fragment="script">
-    <script th:src="@{/js/loginForm.js}"></script>
 </div>
 
 <div layout:fragment="content">
@@ -30,14 +29,14 @@
                     <p class="text-white-50 mt-2 mb-5">로그인</p>
 
                     <div class = "mb-2">
-                        <form id="login-form">
+                        <form action="/login" method="POST">
                             <div class="mb-3">
                                 <label class="form-label text-white">이메일</label>
-                                <input type="text" class="form-control" id="memberName" placeholder="이메일">
+                                <input type="text" class="form-control" id="memberName" name="username" placeholder="이메일">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label text-white" >비밀번호</label>
-                                <input type="password" class="form-control" id="password" placeholder="비밀번호">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
                             </div>
                             <div class="mb-3" id="elp"></div>
                             <button type="submit" class="btn btn-light">로그인</button>

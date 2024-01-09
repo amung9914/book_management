@@ -1,4 +1,5 @@
-    fetch("bookList", {
+
+    fetch("/bookList", {
         method: "GET",
     }).then(response => {
         if (response.status === 200 || response.status === 201) {
@@ -9,11 +10,14 @@
             if (container) {
                 container.innerHTML = "<h1>요청이 정상적으로 처리되지 않았습니다.</h1>";
             }
+            throw new Error("서버 응답 오류: "+ response.status);
         }
     }).then(data => {
        if(data) {
            success(data);
        }
+    }).catch(error => {
+        console.log("오류발생:",error);
     });
 
 function success(response){

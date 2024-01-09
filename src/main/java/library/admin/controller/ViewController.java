@@ -36,6 +36,10 @@ public class ViewController {
         return "detailBook";
     }
 
+    @GetMapping("/admin/admin")
+    public String testAdmin(){
+        return "createBookForm";
+    }
 
     @GetMapping("/updateForm/{bookId}")
     public String updateForm(@PathVariable int bookId, Model model){

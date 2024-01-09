@@ -17,11 +17,14 @@ public interface MemberMapper {
     @Select("select member_name from member")
     List<String> findAll();
 
-    @Insert("INSERT INTO member(member_name,password) VALUES(#{memberName},#{password})")
+    @Insert("INSERT INTO member(member_name,password,authority) VALUES(#{memberName},#{password},#{authority})")
     void join(MemberVO member);
 
     @Select("SELECT * FROM member WHERE member_name = #{memberName}")
     MemberVO findByName(MemberVO member);
+
+    @Select("SELECT * FROM member WHERE member_name = #{memberName}")
+    MemberVO findByNameForLogin(String memberName);
 
     @Select("SELECT * FROM member WHERE member_id = #{memberId}")
     MemberVO findById(int memberId);

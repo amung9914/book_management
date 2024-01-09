@@ -2,7 +2,8 @@ CREATE TABLE member 	  -- 회원 테이블
 (
     member_id    INT primary key AUTO_INCREMENT,
     member_name  VARCHAR(50) NOT NULL unique,
-    password     VARCHAR(20) NOT NULL
+    password     VARCHAR(70) NOT NULL,
+    authority    VARCHAR(5) NOT NULL
 );
 CREATE TABLE book 	  -- 책 테이블
 (
