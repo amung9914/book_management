@@ -47,6 +47,7 @@ Github에 push를 하면 바로 배포될 수 있도록 CI/CD를 구현하였습
  
   ![image](https://github.com/amung9914/book_management/assets/137124338/8b11c114-f932-4489-9e16-320436402c89)
 - 정규표현식을 사용하여 올바른 이메일 및 비밀번호 양식 검증
+- 비밀번호는 암호화 후 DB에 저장
 
 ### 초기화면 - 도서 목록 확인
 ![image](https://github.com/amung9914/book_management/assets/137124338/9dfd01d9-549d-4ed2-b85c-89732c1f595c)
